@@ -4,7 +4,6 @@ from Client import Client
 
 s, msg = Client().iniciateClient()
 
-
 while True:
     print("---------------MENU--------------------")
     print("1) Add User")
@@ -12,8 +11,9 @@ while True:
     print("3) Delete User")
     print("4) Send user to Email")
     print("5) Exit...")
+
     print("")
-    p = input("Escoga una opcion :")
+    p = input("Choose Option :")
     p = int(p)
     if p >= 6:
         break
@@ -25,12 +25,15 @@ while True:
         fecha = input("Enter Birth Date :")
         imagen = input("Enter Profile pic Url : ")
         usr = User(username, name, email, cedula, fecha, imagen)
-        val=usr.VerifyUser(username,name,email,cedula,fecha)
-        if not val:
-            print("Error!!!!!!!!!")
-        else:
+        s.send(usr.toString().encode('utf-8'))
+        enc = s.recv(1024)
+        res = enc.decode('utf-8')
+        if res == "YES":
             s.send(usr.toString().encode('utf-8'))
             print("User succsesfully added!!!\n")
+
+        else:
+            print("Error!!!!!!!!!")
 
     elif p == 2:
         username = input("Enter the Username to display : ")
@@ -39,7 +42,7 @@ while True:
         enc = s.recv(1024)
         res = enc.decode('utf-8')
         if res != " ":
-            tokens = res.split(" ")
+            tokens = res.split(",")
             print("----User Info--------")
             print("Username : "+tokens[0])
             print("Name : "+tokens[1])
@@ -58,7 +61,6 @@ while True:
             print("User succesfully deleted!!!!!!")
         else:
             print("Error!!!!")
-
     elif p == 4:
         username = input("Enter name of username to send info : ")
         email = input("Enter the email to send contact info : ")
@@ -69,5 +71,5 @@ while True:
         res = enc.decode('utf-8')
         if res == "YES":
             print("Susccesfully sent email!!!!!!")
-        elif res:
-            print('Error!!!!!')
+        elif res == "NOT":
+            print('Error Contact not Found!!!!')
