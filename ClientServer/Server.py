@@ -26,7 +26,7 @@ class Server:
     while True:
         client_data = client_socket.recv(1024)
         d = client_data.decode('utf-8')
-        tokens = d.split(",")
+        tokens = d.split("\n")
         if len(tokens) == 2:
             if tokens[1] == 'ShowUser':
                 enc = fm.search(tokens[0])

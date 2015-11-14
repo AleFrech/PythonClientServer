@@ -37,7 +37,7 @@ while True:
 
     elif p == 2:
         username = input("Enter the Username to display : ")
-        username += ",ShowUser"
+        username += "\n"+"ShowUser"
         s.send(username.encode('utf-8'))
         enc = s.recv(1024)
         res = enc.decode('utf-8')
@@ -53,7 +53,7 @@ while True:
             print('Not such user in our database')
     elif p == 3:
         username = input("Enter Username to delete : ")
-        username += ",DeleteUser"
+        username += "\n"+"DeleteUser"
         s.send(username.encode('utf-8'))
         enc = s.recv(1024)
         res = enc.decode('utf-8')
@@ -64,8 +64,8 @@ while True:
     elif p == 4:
         username = input("Enter name of username to send info : ")
         email = input("Enter the email to send contact info : ")
-        username += ",SendEamil"
-        username+=","+email
+        username += "\n"+"SendEamil"
+        username+="\n"+email
         s.send(username.encode('utf-8'))
         enc = s.recv(1024)
         res = enc.decode('utf-8')
