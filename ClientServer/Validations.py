@@ -21,7 +21,7 @@ class Validations:
             return -1
 
     def VerifyDate(self, string):
-        match = re.match(r'\d{2}/\d{2}/\d{4}', string)
+        match = re.match(r'\d{2}-\d{2}-\d{4}', string)
         if match :
             return 1
         else:
