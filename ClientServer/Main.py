@@ -18,8 +18,8 @@ while True:
     if p >= 6:
         break
     if p == 1:
-        name = input("Enter Name : ")
         username = input("Enter Username : ")
+        name = input("Enter Name : ")
         email = input("Enter Email : ")
         cedula = input("Enter Identity Card : ")
         fecha = input("Enter Birth Date :")

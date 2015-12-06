@@ -13,7 +13,6 @@ class FileManager:
         except:
             temp = os.path.join(os.path.abspath('Data.txt'))
             file = open(temp, 'w')
-            file.write('0\n')
             file.close()
 
     def writeUser(self,User):
@@ -23,13 +22,19 @@ class FileManager:
         file.write(User + '\n')
         file.close()
 
-    def isUnique(self,parametro):
+    def isUnique(self,parametro,pos):
         self.createFile()
-        fn = os.path.join(os.path.abspath('Data.txt'))
-        with open(fn, 'r') as inF:
-            for line in inF:
-                if parametro in line:
-                    return False
+        users=""
+        users = self.getUsers();
+        userlist = users.split("\n")
+        if len(userlist)<=1:
+            return True
+        for usr in userlist:
+            tokens=usr.split(",")
+            if len(tokens) <= 1:
+                return True
+            if tokens[int(pos)] == parametro:
+                return False
         return True
 
     def getUsers(self):
@@ -49,9 +54,11 @@ class FileManager:
 
     def search(self,username):
         self.createFile()
-        fn = os.path.join(os.path.abspath('Data.txt'))
-        with open(fn, 'r') as inF:
-            for line in inF:
-                if username in line:
-                    return line
+        users=""
+        users = self.getUsers();
+        userlist = users.split("\n")
+        for usr in userlist:
+            tokens=usr.split(",");
+            if tokens[0]==username:
+                return usr
         return ' '
