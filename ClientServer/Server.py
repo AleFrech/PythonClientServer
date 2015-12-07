@@ -36,7 +36,8 @@ class Server:
                 users = fm.getUsers()
                 usersList = users.split("\n")
                 for u in usersList:
-                    if tokens[0] in u:
+                    tok=u.split(",");
+                    if tokens[0] in tok[0]:
                         print(u)
                         usersList.remove(u)
                 fm.reWriteFile()
